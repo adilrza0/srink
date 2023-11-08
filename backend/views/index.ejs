@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Srink</h1>
+    <h3>shrink Your long Url</h3>
+    <form id="form">
+        <label for="FullUrl">URL</label>
+        <input type="url" name="full Url" id="fullUrl">
+        <br>
+        <label for="customName">custom Name</label>
+        <input type="text" id="customName">
+        <br>
+        <button type="submit">Shrink</button>
+    </form>
+    <a id="link" href=""></a>
+    
+</body>
+<script>
+    const form =document.getElementById("form")
+    const url=document.getElementById("fullUrl")
+    const customName=document.getElementById("customName")
+    const link=document.getElementById("link")
+    form.addEventListener("submit",function(e){
+        {
+        e.preventDefault()
+        console.log(customName.value,url.value)
+        fetch("http://localhost:4500/addUrl",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({url:url.value,customName:customName.value})
+        })
+        .then((res)=>{
+            return res.json()
+        })
+        .then((data)=>{
+            console.log(data)
+            link.innerHTML=data.ShortUrl
+            link.setAttribute("href",data.ShortUrl)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
+
+    })
+</script>
+</html>
