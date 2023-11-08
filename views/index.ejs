@@ -29,7 +29,7 @@
         {
         e.preventDefault()
         console.log(customName.value,url.value)
-        fetch("http://localhost:4500/addUrl",{
+        fetch("/addUrl",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
